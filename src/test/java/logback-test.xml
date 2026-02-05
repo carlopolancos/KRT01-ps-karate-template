@@ -14,8 +14,9 @@
         </encoder>
     </appender>    
    
-    <logger name="com.intuit" level="INFO"/>
-   
+<!--    <logger name="com.intuit" level="INFO"/>-->
+    <logger name="com.intuit" level="DEBUG"/>
+
     <root level="info">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />

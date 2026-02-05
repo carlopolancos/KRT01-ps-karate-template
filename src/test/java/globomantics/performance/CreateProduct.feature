@@ -1,4 +1,4 @@
-@debug
+@ignore
 Feature: Create and Delete a Product for Performance Test
 
   Background:

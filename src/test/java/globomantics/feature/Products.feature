@@ -1,11 +1,12 @@
+@debug
 Feature: Tests on the Globomantics Categories API
 
   Background:
+    * def testDataGenerator = Java.type('helpers.TestDataGenerator')
     * url apiUrl
     * def productRequestBody = read('classpath:globomantics/data/newProduct.json')
     * callonce read('classpath:helpers/ProductSchema.feature')
 
-  @debug
   Scenario: Get all products
     Given path 'product'
     When method get
@@ -36,7 +37,7 @@ Feature: Tests on the Globomantics Categories API
     And match each response == productSchema
 
   Scenario: Create and Delete product
-    * def productName = 'Fast train'
+    * def productName = testDataGenerator.getRandomProductName()
     * set productRequestBody.name = productName
 
     #Create Product

@@ -1,4 +1,3 @@
-@debug
 Feature: List all products for Performance Test
 
   Background:
