@@ -6,7 +6,7 @@ It contains the skeleton files required to start building a Karate automation te
 
 Run using:
 TERMINAL 1
-cd D:\'Karate Test Framework'\KRT02-globomantics-toys
+cd D:\Karate-Test-Framework\KRT02-globomantics-toys
 .\mvnw spring-boot:run
 
 TERMINAL 2
@@ -15,3 +15,4 @@ mvn test "-Dkarate.options=--tags @debug"
 mvn test "-Dkarate.options=--tags @stable"
 mvn test "-Dkarate.options=--tags ~@skip"
 mvn test "-Dkarate.env=dev" //or prod (fails)
+mvn clean test-compile gatling:test

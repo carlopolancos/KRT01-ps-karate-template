@@ -1,4 +1,3 @@
-@debug
 Feature: Tests on the Globomantics Categories API
 
   Background:

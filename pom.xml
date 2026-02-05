@@ -6,22 +6,34 @@
     <artifactId>karate-fundamentals</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
- 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>21</java.version>
         <maven.compiler.version>3.11.0</maven.compiler.version>
-        <maven.surefire.version>3.0.0</maven.surefire.version>        
-        <karate.version>1.4.1</karate.version>
+        <maven.surefire.version>3.0.0</maven.surefire.version>
+        <karate.version>1.5.2</karate.version>
+        <scala.version>2.13.12</scala.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.intuit.karate</groupId>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.karatelabs</groupId>
             <artifactId>karate-junit5</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
-        </dependency>		
+        </dependency>
+        <dependency>
+            <groupId>io.karatelabs</groupId>
+            <artifactId>karate-gatling</artifactId>
+            <version>${karate.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -51,7 +63,45 @@
                 <configuration>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
-            </plugin>          
+            </plugin>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.11.0</version>
+                <configuration>
+                    <includes>
+                        <include>globomantics.performance.PerfTest</include>
+                    </includes>
+                    <jvmArgs>
+                        <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                        <arg>-Dgatling.core.enableColors=false</arg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>4.8.1</version>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <args>
+                        <arg>-Jbackend:GenBCode</arg>
+                        <arg>-Jdelambdafy:method</arg>
+                        <arg>-deprecation</arg>
+                        <arg>-feature</arg>
+                        <arg>-unchecked</arg>
+                        <arg>-language:implicitConversions</arg>
+                        <arg>-language:postfixOps</arg>
+                    </args>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>        
     </build>       
     
