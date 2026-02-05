@@ -1,0 +1,7 @@
+{
+  "name": "Toy name goes here",
+  "description": "Toy description goes heree",
+  "price": "49.99",
+  "categoryId": 1,
+  "inStock": true
+}
